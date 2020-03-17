@@ -49,6 +49,23 @@ function showLoading() {
   }, 1000);
 }
 
+// filterPosts
+function filterPosts(e) {
+  const term = e.target.value.toUpperCase();
+  const posts = document.querySelectorAll(".post");
+
+  posts.forEach(post => {
+    const tilte = post.querySelector(".post-title").innerText.toUpperCase();
+    const body = post.querySelector(".post-body").innerText.toUpperCase();
+
+    if (tilte.indexOf(term) > -1 || body.indexOf(term) > -1) {
+      post.style.display = "flex";
+    } else {
+      post.style.display = "none";
+    }
+  });
+}
+
 // 显示页面帖子
 showPosts();
 
@@ -60,3 +77,5 @@ window.addEventListener("scroll", () => {
     showLoading();
   }
 });
+
+filter.addEventListener("input", filterPosts);
